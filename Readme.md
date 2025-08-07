@@ -1,4 +1,4 @@
-# 📊 Customer Churn Prediction
+# 📊 Customer Abandono Prediction
 
 Este proyecto tiene como objetivo predecir la probabilidad de que un cliente abandone una empresa de telecomunicaciones utilizando modelos de machine learning. Se implementó un pipeline completo de ciencia de datos: desde la limpieza y transformación de los datos hasta la evaluación de múltiples algoritmos con ajuste de hiperparámetros y técnicas para tratar el desbalanceo de clases.
 
@@ -6,7 +6,7 @@ Este proyecto tiene como objetivo predecir la probabilidad de que un cliente aba
 
 ## 🧠 Objetivo del proyecto
 
-Predecir si un cliente abandonará o no la compañía (`Churn`) a partir de sus características demográficas, contractuales y de facturación. Esto permitirá a la empresa anticipar pérdidas y diseñar estrategias de retención.
+Predecir si un cliente abandonará o no la compañía (`Abandono`) a partir de sus características demográficas, contractuales y de facturación. Esto permitirá a la empresa anticipar pérdidas y diseñar estrategias de retención.
 
 ---
 
@@ -36,7 +36,7 @@ Predecir si un cliente abandonará o no la compañía (`Churn`) a partir de sus 
    - División en conjuntos de entrenamiento, validación y prueba.
 
 3. **Balanceo de clases**
-   - Aplicación de SMOTE sobre los datos de entrenamiento para aumentar la clase minoritaria (`Churn = Yes`).
+   - Aplicación de SMOTE sobre los datos de entrenamiento para aumentar la clase minoritaria (`Abanodno = 1`).
 
 4. **Entrenamiento y evaluación**
    - Comparación entre distintos modelos: Árbol de Decisión, Random Forest y KNN
@@ -76,12 +76,28 @@ El modelo con mejor rendimiento fue **Árbol de decisiones**, con hiperparámetr
 
 ## 📌 Resultados destacados
 
+### Analisis exploratorio
+Encontramos que la variable `Abandono` está desbalanceada, con un 73% de clientes que no abandonan y un 27% que sí. Esto es crítico para el modelo, ya que puede llevar a un sesgo hacia la clase mayoritaria.
+
+![alt text](Imagenes\Distribucion_variable_respuesta.png)
+
+
+Las variables númericas presentaron diferentes correlaciones con la variable de respuesta `Abandono`. La que tuvo una mayor correlación fue `Cargo_mensual` con un coeficiente de **-0.35**, lo que indica que a mayor cargo mensual, menor es la probabilidad de abandono.
+
+![alt text](Imagenes\Correlacion_variables_numericas.png)
+
+De igual forma al observar las distribuciones de la variable `Cargo_mensual` con respecto a la variable de respuesta `Abandono`, se puede observar que los clientes que abandonan la empresa tienden a tener un cargo mensual más bajo, lo que puede ser un indicador importante para el modelo.
+
+
+
 - **Modelo final:** Árbol de decisiones con pipeline completo.
 - **Métricas (test set):**
     - Exactitud: 0.661
     - Precisión: 0.433
     - Recall: 0.879
     - F1 Score: 0.58
+
+![alt text](Imagenes\Matriz_confucion_mejor_modelo.png)
 
 *(Valores simulados para ilustración. Actualizar con métricas reales.)*
 
@@ -95,6 +111,9 @@ De igual forma es importante destacar que el las variables más importantes para
 | remainder__Peliculas_en_streaming                     | 4.69            |
 | onehotencoder__Tipo_servicio_internet_Fibra Optica    | 2.68            |
 | remainder__Es_mayor_de_edad                           | 0.51            |
+
+
+![alt text](Imagenes\Importancia_variables.png)
 
 Como se puede observar se utilizaron muy pocas variables para predecir el abandono de un cliente, por lo tanto considero que todavía existen muchas oportunidades de mejora en el modelo, buscando nuevas variables que puedan aportar información relevante relacionadas con clientes que han abandonado el servicio.
 
